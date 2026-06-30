@@ -1,0 +1,5 @@
+Flask
+spacy
+pdfplumber
+python-docx
+PyMuPDF
