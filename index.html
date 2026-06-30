@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Parser</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside class="sidebar">
+
+        <h2>🤖 ATS Parser</h2>
+
+        <ul>
+
+            <li class="active">🏠 Dashboard</li>
+
+            <li>📄 Resume Upload</li>
+
+            <li>👤 Candidates</li>
+
+            <li>📊 Analytics</li>
+
+            <li>⚙ Settings</li>
+
+        </ul>
+
+    </aside>
+
+    <main class="content">
+
+        <header>
+
+            <h1>AI Resume Parser</h1>
+
+            <p>Extract and organize candidate information using Artificial Intelligence.</p>
+
+        </header>
+
+
+        <div class="upload-card">
+
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+
+                <div class="drop-area">
+
+                    <div class="upload-icon">
+
+                        📂
+
+                    </div>
+
+                    <h2>Upload Resume</h2>
+
+                    <p>Drag & Drop PDF or DOCX</p>
+
+                    <input type="file" name="resume" required>
+
+                    <button type="submit">
+
+                        Upload Resume
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+{% if result %}
+
+<div class="dashboard">
+
+<div class="left">
+
+<div class="card">
+
+<h2>👤 Candidate Profile</h2>
+
+<div class="row">
+
+<span>Name</span>
+
+<strong>{{result.Name}}</strong>
+
+</div>
+
+<div class="row">
+
+<span>Email</span>
+
+<strong>{{result.Email}}</strong>
+
+</div>
+
+<div class="row">
+
+<span>Phone</span>
+
+<strong>{{result.Phone}}</strong>
+
+</div>
+
+<div class="row">
+
+<span>Experience</span>
+
+<strong>{{result.Experience}}</strong>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>🎓 Education</h2>
+
+{% for edu in result.Education %}
+
+<div class="badge">{{edu}}</div>
+
+{% endfor %}
+
+</div>
+
+
+
+<div class="card">
+
+<h2>🏆 Certifications</h2>
+
+{% for cert in result.Certifications %}
+
+<div class="badge purple">{{cert}}</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+
+<div class="right">
+
+<div class="card">
+
+<h2>⭐ ATS Match Score</h2>
+
+<div class="score">
+
+{{result.ATS}}%
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>🛠 Skills</h2>
+
+<div class="skills">
+
+{% for skill in result.Skills %}
+
+<span class="skill">{{skill}}</span>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>📂 Projects</h2>
+
+<ul>
+
+{% for project in result.Projects %}
+
+<li>{{project}}</li>
+
+{% endfor %}
+
+</ul>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>📄 Resume Preview</h2>
+
+<div class="preview">
+
+{{result.Resume}}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</main>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
